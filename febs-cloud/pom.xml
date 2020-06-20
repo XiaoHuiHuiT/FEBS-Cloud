@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.javaboy</groupId>
+    <artifactId>febs-cloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--子模块-->
+    <modules>
+        <!--通用模块主要用于定义一些各个微服务通用的实体类，工具类或者第三方依赖等。-->
+        <module>../febs-common</module>
+        <!--
+        微服务注册中心的作用就是用于统一管理微服务实例，微服务间的调用只需要知道对方的服务名，
+        而无需关注具体的IP和端口，便于微服务架构的拓展和维护。
+        -->
+        <module>../febs-register</module>
+        <!--Spring Cloud OAuth和Spring Cloud Security搭建一个统一给微服务发放访问令牌的认证服务器febs-auth-->
+        <module>../febs-auth</module>
+    </modules>
+    <!--
+    指定了packaging为pom，表示这是一个纯 聚合模块，无需打包为jar或者war；
+    -->
+    <packaging>pom</packaging>
+
+    <!--name指定为FEBS-Cloud；引入了Spring Boot 2.1.6.RELEASE和Spring Cloud Greenwich.SR1。-->
+    <name>FEBS-Cloud</name>
+    <description>FEBS-Cloud：Spring Cloud，Spring Security OAuth2 微服务权限管理系统</description>
+
+    <!--SpringBoot父依赖-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!--定义版本-->
+    <properties>
+        <!--JDk版本-->
+        <java.version>11</java.version>
+        <!--Cloud版本-->
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+    </properties>
+
+    <!--在这里只是定义需要使用的依赖，还没有引入依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
