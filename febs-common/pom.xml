@@ -24,6 +24,19 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--因为后续我们需要将认证服务器生成的Token存储到Redis中，并且Redis依赖可能会被多个微服务使用到，于是我们在febs-common模块中引入redis相关依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--
+        此外，我们需要将febs-auth服务注册到上一节搭建的febs-register中，所以我们在febs-common模块里继续添加Eureka相关依赖
+        往Eureak服务端注册服务的应用称为Eureka客户端，所以上面引入的是Eureka Client相关依赖
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
