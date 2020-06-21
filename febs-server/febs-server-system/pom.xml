@@ -13,6 +13,11 @@
     <name>FEBS-Server-System</name>
     <description>FEBS-Server-System微服务系统模块</description>
 
+    <properties>
+        <!--JDK版本号-->
+        <java.version>11</java.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

@@ -58,6 +58,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
+
+        <!--自定义配置类还需引入spring-boot-configuration-processor依赖，因为这个依赖会在多个微服务子系统里使用到，所以将其添加到febs-common的pom文件中-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

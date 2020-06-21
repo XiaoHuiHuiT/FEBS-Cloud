@@ -19,6 +19,11 @@
         <module>febs-server-test</module>
     </modules>
 
+    <properties>
+        <!--JDK版本号-->
+        <java.version>11</java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.javaboy</groupId>
