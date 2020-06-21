@@ -1,0 +1,35 @@
+server:
+  # 应用端口号为8202
+  port: 8202
+
+spring:
+  application:
+    # 服务名称为FEBS-Server-Test
+    name: FEBS-Server-Test
+
+eureka:
+  instance:
+    # 向Eureka 服务端发送心跳的间隔时间，单位为秒，用于服务续约。这里配置为20秒，即每隔20秒向febs-register发送心跳，表明当前服务没有宕机；
+    lease-renewal-interval-in-seconds: 20
+  client:
+    # 表示是否将服务注册到Eureka服务端
+    register-with-eureka: true
+    # 表示是否从Eureka服务端获取服务信息
+    fetch-registry: true
+    # 微服务更新实例信息的变化到Eureka服务端的间隔时间，单位为秒，这里指定为30秒（这就是微服务启动后，要过一会才能注册到Eureka服务端的原因）
+    instance-info-replication-interval-seconds: 30
+    # 默认值为30秒，即每30秒去Eureka服务端上获取服务并缓存，这里指定为3秒的原因是方便开发时测试，实际可以指定为默认值即可
+    registry-fetch-interval-seconds: 3
+    serviceUrl:
+      # 指定Eureka服务端的地址，这里为当前项目地址 http://localhost:8001/register/eureka/
+      defaultZone: http://febs:123456@localhost:8001/register/eureka/
+
+# oauth2相关配置
+security:
+  oauth2:
+    resource:
+      id: ${spring.application.name}
+      # 路径为http://localhost:8301/auth/user，通过微服务网关，该请求将被转发到http://localhost:8101/user
+      # 到认证服务器里校验当前请求头中的令牌是否为合法的令牌
+      # 通过当前令牌获取对应的用户信息
+      user-info-uri: http://localhost:8301/auth/user

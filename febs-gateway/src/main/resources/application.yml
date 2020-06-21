@@ -33,6 +33,18 @@ zuul:
       serviceId: FEBS-Auth
       # 由于我们需要在请求头中携带令牌，所以sensitiveHeaders设置为*，表示不过滤请求头信息，即请求的请求头信息将原封不动的转发出去
       sensitiveHeaders: "*"
+    system:
+      # 所有以/system开头的请求都会被转发到名称为FEBS-Server-System的服务上
+      path: /system/**
+      serviceId: FEBS-Server-System
+      # 由于我们需要在请求头中携带令牌，所以sensitiveHeaders设置为*，表示不过滤请求头信息，即请求的请求头信息将原封不动的转发出去
+      sensitiveHeaders: "*"
+    test:
+      # 所有以/test开头的请求都会被转发到名称为FEBS-Server-Test的服务上
+      path: /test/**
+      serviceId: FEBS-Server-Test
+      # 由于我们需要在请求头中携带令牌，所以sensitiveHeaders设置为*，表示不过滤请求头信息，即请求的请求头信息将原封不动的转发出去
+      sensitiveHeaders: "*"
   # 设置为true时，表示开启重试机制
   retryable: true
   # Zuul配合Eureka后会有一套默认的配置规则，这里我们只想请求根据我们显示配置的路由规则走，所以设置为*，表示关闭所有默认路由配置规则

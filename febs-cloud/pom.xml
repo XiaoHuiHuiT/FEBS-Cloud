@@ -25,6 +25,8 @@
         客户端可以降低复杂性，无需关注具体是哪个微服务在提供服务
         -->
         <module>../febs-gateway</module>
+
+        <!--两个微服务提供者（同时也是资源服务器）febs-server-system和febs-server-test-->
         <module>../febs-server</module>
     </modules>
     <!--

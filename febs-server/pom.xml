@@ -14,6 +14,11 @@
     <name>FEBS-Server</name>
     <description>FEBS-Server服务提供模块</description>
 
+    <modules>
+        <module>febs-server-system</module>
+        <module>febs-server-test</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>com.javaboy</groupId>
