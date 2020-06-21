@@ -19,6 +19,13 @@
         <module>../febs-register</module>
         <!--Spring Cloud OAuth和Spring Cloud Security搭建一个统一给微服务发放访问令牌的认证服务器febs-auth-->
         <module>../febs-auth</module>
+        <!--
+        服务网关就是一个介于客户端与服务端之间的中间层。在这种情况下，
+        客户端只需要跟服务网关交互，无需调用具体的微服务接口。这样的好处在于，
+        客户端可以降低复杂性，无需关注具体是哪个微服务在提供服务
+        -->
+        <module>../febs-gateway</module>
+        <module>../febs-server</module>
     </modules>
     <!--
     指定了packaging为pom，表示这是一个纯 聚合模块，无需打包为jar或者war；
