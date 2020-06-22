@@ -1,9 +1,11 @@
 package com.javaboy.febs.auth;
 
+import com.javaboy.febs.common.annotation.EnableFebsAuthExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+@EnableFebsAuthExceptionHandler
 @SpringBootApplication
 /* 开启服务注册与发现功能*/
 @EnableDiscoveryClient

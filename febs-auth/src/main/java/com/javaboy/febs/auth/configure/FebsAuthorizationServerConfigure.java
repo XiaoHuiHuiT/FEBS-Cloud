@@ -3,6 +3,7 @@ package com.javaboy.febs.auth.configure;
 import com.javaboy.febs.auth.properties.FebsAuthProperties;
 import com.javaboy.febs.auth.properties.FebsClientsProperties;
 import com.javaboy.febs.auth.service.FebsUserDetailService;
+import com.javaboy.febs.auth.translator.FebsWebResponseExceptionTranslator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,9 @@ public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigu
     @Autowired
     private FebsAuthProperties authProperties;
 
+    @Autowired
+    private FebsWebResponseExceptionTranslator exceptionTranslator;
+
     /*
     1.客户端从认证服务器获取令牌的时候，必须使用client_id为febs，client_secret为123456的标识来获取
     2.该client_id支持password模式获取令牌，并且可以通过refresh_token来获取新的令牌
@@ -74,12 +78,14 @@ public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigu
     }
 
     @Override
+    @SuppressWarnings("all")
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         /* tokenStore使用的是RedisTokenStore，认证服务器生成的令牌将被存储到Redis中*/
         endpoints.tokenStore(tokenStore())
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
-                .tokenServices(defaultTokenServices());
+                .tokenServices(defaultTokenServices())
+                .exceptionTranslator(exceptionTranslator);
     }
 
     @Bean
