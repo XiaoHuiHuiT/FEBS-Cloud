@@ -26,6 +26,9 @@ eureka:
 
 # zuul相关配置
 zuul:
+  SendErrorFilter:
+    error:
+      disable: true
   routes:
     auth:
       # 所有以/auth开头的请求都会被转发到名称为FEBS-Auth的服务上
