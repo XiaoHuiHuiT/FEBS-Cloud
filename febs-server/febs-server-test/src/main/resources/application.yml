@@ -33,3 +33,13 @@ security:
       # 到认证服务器里校验当前请求头中的令牌是否为合法的令牌
       # 通过当前令牌获取对应的用户信息
       user-info-uri: http://localhost:8301/auth/user
+
+# feign
+feign:
+  hystrix:
+    # Feign的回退生效,因为Feign的回退功能是基于Hystrix实现的，所以需要开启它
+    enabled: true
+
+hystrix:
+  # 会把SecurityContext对象从你当前主线程传输到Hystrix线程(分享安全上下文)
+  shareSecurityContext: true
