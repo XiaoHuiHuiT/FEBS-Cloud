@@ -1,5 +1,6 @@
 package com.javaboy.febs.auth.configure;
 
+import com.javaboy.febs.auth.filter.ValidateCodeFilter;
 import com.javaboy.febs.auth.service.FebsUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /* 该类继承了WebSecurityConfigurerAdapter适配器，重写了几个方法*/
 /* 开启了和Web相关的安全配置*/
@@ -18,13 +20,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /* FebsSecurityConfigure用于处理和令牌相关的请求*/
 public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
 
+    private final ValidateCodeFilter validateCodeFilter;
+
     /* 注入了FebsUserDetailService*/
     private final FebsUserDetailService userDetailService;
     private final PasswordEncoder passwordEncoder;
 
-    public FebsSecurityConfigure(FebsUserDetailService userDetailService, PasswordEncoder passwordEncoder) {
+    public FebsSecurityConfigure(FebsUserDetailService userDetailService, PasswordEncoder passwordEncoder, ValidateCodeFilter validateCodeFilter) {
         this.userDetailService = userDetailService;
         this.passwordEncoder = passwordEncoder;
+        this.validateCodeFilter = validateCodeFilter;
     }
 
     /* PasswordEncoder类型的Bean，该类是一个接口，定义了几个和密码加密校验相关的方法，这里我们使用的是Spring Security内部实现好的BCryptPasswordEncoder
@@ -43,10 +48,19 @@ public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
     }
 
     /* 重写了WebSecurityConfigurerAdapter类的configure(HttpSecurity http)方法*/
+
+    /**
+     * 在configure(HttpSecurity http)方法中，
+     * 通过http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)代码，
+     * 将ValidateCodeFilter过滤器添加到了UsernamePasswordAuthenticationFilter过滤器前
+     * @param http HttpSecurity
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         /* requestMatchers().antMatchers("/oauth/**")的含义是：FebsSecurityConfigure安全配置类只对/oauth/开头的请求有效*/
-        http.requestMatchers()
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .requestMatchers()
                 .antMatchers("/oauth/**")
                 .and()
                 .authorizeRequests()

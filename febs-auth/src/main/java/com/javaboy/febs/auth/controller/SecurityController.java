@@ -1,22 +1,30 @@
 package com.javaboy.febs.auth.controller;
 
+import com.javaboy.febs.auth.service.ValidateCodeService;
 import com.javaboy.febs.common.entity.FebsResponse;
 import com.javaboy.febs.common.exception.FebsAuthException;
+import com.javaboy.febs.common.exception.ValidateCodeException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 
 @RestController
 public class SecurityController {
 
-    @Autowired
-    private ConsumerTokenServices consumerTokenServices;
+    private final ConsumerTokenServices consumerTokenServices;
+    private final ValidateCodeService validateCodeService;
+
+    public SecurityController(ConsumerTokenServices consumerTokenServices, ValidateCodeService validateCodeService) {
+        this.consumerTokenServices = consumerTokenServices;
+        this.validateCodeService = validateCodeService;
+    }
 
     @GetMapping("oauth/test")
     public String testOauth() {
@@ -40,5 +48,18 @@ public class SecurityController {
             throw new FebsAuthException("退出登录失败");
         }
         return febsResponse.message("退出登录成功");
+    }
+
+    /**
+     * 生成验证码，
+     *
+     * @param request  HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws IOException           IO异常
+     * @throws ValidateCodeException 验证码异常
+     */
+    @GetMapping("captcha")
+    public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException, ValidateCodeException {
+        validateCodeService.create(request, response);
     }
 }

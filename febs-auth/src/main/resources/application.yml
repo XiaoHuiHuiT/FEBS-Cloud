@@ -30,7 +30,8 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-    jedis:
+    # 将jedis换成了lettuce
+    lettuce:
       pool:
         min-idle: 8
         max-idle: 500
