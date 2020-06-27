@@ -3,6 +3,9 @@ server:
   port: 8301
 
 spring:
+  # 关闭数据库自动装配,否则这些模块在启动的时候将抛出异常：Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   application:
     # 服务名称为FEBS-Gateway
     name: FEBS-Gateway
