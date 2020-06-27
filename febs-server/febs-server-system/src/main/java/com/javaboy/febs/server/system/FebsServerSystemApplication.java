@@ -1,6 +1,7 @@
 package com.javaboy.febs.server.system;
 
 import com.javaboy.febs.common.annotation.EnableFebsAuthExceptionHandler;
+import com.javaboy.febs.common.annotation.FebsCloudApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 /* 开启服务注册与发现*/
 @EnableDiscoveryClient
+@FebsCloudApplication
 @SpringBootApplication
 public class FebsServerSystemApplication {
 
