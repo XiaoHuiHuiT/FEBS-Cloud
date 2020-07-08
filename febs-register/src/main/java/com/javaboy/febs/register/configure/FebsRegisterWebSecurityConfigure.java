@@ -10,7 +10,9 @@ public class FebsRegisterWebSecurityConfigure extends WebSecurityConfigurerAdapt
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         /* 忽略/eureka/**的Http请求，别的都需要认证*/
-        http.csrf().ignoringAntMatchers("/eureka/**");
+        http.csrf().ignoringAntMatchers("/eureka/**")
+                .and()
+                .authorizeRequests().antMatchers("/actuator/**").permitAll();
         super.configure(http);
     }
 }

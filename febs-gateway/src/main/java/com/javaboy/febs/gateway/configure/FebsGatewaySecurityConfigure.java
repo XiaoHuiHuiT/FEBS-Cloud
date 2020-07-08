@@ -9,6 +9,7 @@ public class FebsGatewaySecurityConfigure extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         /* 关闭了csrf功能，否则会报csrf相关异常*/
-        http.csrf().disable();
+        http.csrf().disable().authorizeRequests().antMatchers("/actuator/**").permitAll();
+        super.configure(http);
     }
 }

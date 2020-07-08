@@ -3,59 +3,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>febs-cloud</artifactId>
         <groupId>com.javaboy</groupId>
+        <artifactId>febs-monitor</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
-    <artifactId>febs-register</artifactId>
+    <artifactId>febs-monitor-admin</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>FEBS-Register</name>
-    <description>FEBS-Register服务注册中心</description>
+    <name>FEBS-Monitor-Admin</name>
+    <description>FEBS-Monitor-Admin基于Spring Boot Admin搭建的监控程序</description>
 
     <properties>
         <java.version>11</java.version>
+        <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+        <!-- 替换为 jetty-->
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
         <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
-
-        <!--使用Security保护微服务注册中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-
-        <!--SBA客户端依赖-->
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>2.1.6</version>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

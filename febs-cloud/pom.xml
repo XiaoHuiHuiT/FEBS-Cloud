@@ -28,6 +28,7 @@
 
         <!--两个微服务提供者（同时也是资源服务器）febs-server-system和febs-server-test-->
         <module>../febs-server</module>
+        <module>../febs-monitor</module>
     </modules>
     <!--
     指定了packaging为pom，表示这是一个纯 聚合模块，无需打包为jar或者war；
