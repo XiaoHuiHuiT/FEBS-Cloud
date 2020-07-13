@@ -40,6 +40,21 @@ spring:
         username: febs
         # spring.boot.admin.client.password对应SBA服务端的密码
         password: 123456
+  zipkin:
+    sender:
+      # 指定了使用RabbitMQ收集追踪信息
+      type: rabbit
+    sleuth:
+      sampler:
+        # 默认值为0.1，即采样率才1/10，发送10笔请求只有一笔会被采集。为了测试方便，我们可以将它设置为1，即100%采样；
+        probability: 1
+    # 用于配置RabbitMQ连接信息，你可能会问，为什么刚刚RabbitMQ端口是15672，这里却配置为5672
+    # 是不是写错了呢？其实不是，15672是RabbitMQ的管理页面端口，5672是AMPQ端口。
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: febs
+      password: 123456
 
 # info.**配置了SBA客户端的名称，描述和版本信息
 info:
