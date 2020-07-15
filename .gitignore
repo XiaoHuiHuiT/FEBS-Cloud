@@ -29,3 +29,14 @@ build/
 
 ### VS Code ###
 .vscode/
+febs-auth/src/main/resources/logback-spring.xml
+febs-common/src/main/resources/
+febs-gateway/src/main/resources/logback-spring.xml
+febs-monitor/febs-monitor-admin/src/main/resources/logback-spring.xml
+febs-monitor/febs-monitor-admin/src/main/resources/static/
+febs-monitor/febs-monitor-admin/src/main/resources/templates/
+febs-monitor/febs-monitor-admin/src/test/
+febs-register/src/main/resources/logback-spring.xml
+febs-server/febs-server-system/src/main/resources/logback-spring.xml
+febs-server/febs-server-test/src/main/resources/logback-spring.xml
+log/
