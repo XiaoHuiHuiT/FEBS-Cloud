@@ -29,3 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
+febs-monitor/febs-monitor-admin/src/test/
+log/
